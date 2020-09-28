@@ -17,7 +17,7 @@ const getUserById = (req, res) => {
       res.json(check);
     }
     else {
-      res.json(`Error 404: ${req.params.id} IS NOT A VALID ID !!!`)
+      res.json(`Error 404: id ${req.params.id} DOES NOT EXIST !!!`);
     }  
 };
 //POST
@@ -26,7 +26,7 @@ const createUser = (req, res) => {
     let newUser = req.body;
     newUser.id = counter;
     userData.push(newUser);
-    res.json(userData);
+    res.json(newUser);
 }; 
 //UPDATE USER
 const updateUser = (req, res) => {
@@ -35,7 +35,6 @@ const updateUser = (req, res) => {
     .find(user => user.id == (req.params.id));
 
   if(check){
-    // check.name = req.body.name;
     check.name = sampleUser.name;
     check.username = sampleUser.username;
     check.email = sampleUser.email;
@@ -43,10 +42,18 @@ const updateUser = (req, res) => {
     check.phone = sampleUser.phone;
     check.website = sampleUser.website;
     check.company = sampleUser.company;
-    res.json(userData)
+
+        // check.name = req.body.name;
+    // check.username = req.body.username;
+    // check.email = req.body.email;
+    // check.address =  req.body.address;
+    // check.phone =  req.body.phone;
+    // check.website =  req.body.website;
+    // check.company =  req.body.company;
+    res.json(check)
   } 
   else {
-    res.json(`Error 400: Bad request, user does not exist!!!`)
+    res.json(`Error 400: Bad request, USER DOES NOT EXIST!!!`)
   }
 }
 //DELETE BY ID
@@ -60,7 +67,7 @@ const deleteById = (req, res) => {
       res.send(`User ${check.id} has been DELETED`);
   }
   else {
-    res.json(`Error 400: Bad request, user does not exist!!!`)
+    res.json(`Error 400: Bad request, USER DOES NOT EXIST!!!`)
   }  
 }
 
